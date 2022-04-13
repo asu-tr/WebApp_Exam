@@ -1,0 +1,253 @@
+﻿@page
+@model WebApp_Exam.Pages.CreateExamModel
+@{
+    ViewData["Title"] = "Yeni Sınav Oluştur";
+}
+
+<form method="post">
+
+    <div class="row">
+        Yazı seçiniz:
+        <select id="drpTitles" class="form-control" asp-for="NewExam.WiredText.Title" asp-items="@(new SelectList(Model.WiredTexts, "Title", "Title"))">
+            <option value="">--Seçiniz--</option>
+        </select>
+        <input type="hidden" asp-for="NewExam.WiredText.Title" />
+    </div>
+
+    <br />
+
+    <div class="row">
+        @Html.TextArea("text", new { @class = "form-control", @readonly = "readonly", style = "height:250px;" })
+    </div>
+
+    <hr />
+    <br />
+
+    <div class="row">
+        Soru 1:
+        @Html.TextBox("Q1")
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class=col-md-6>
+            Cevap A:
+            @Html.TextBox("A1", "", new { style="width:350px"})
+        </div>
+        <div class=col-md-6>
+            Cevap B:
+            @Html.TextBox("A2", "", new { style="width:350px"})
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class=col-md-6>
+            Cevap C:
+            @Html.TextBox("A3", "", new { style="width:350px"})
+        </div>
+        <div class=col-md-6>
+            Cevap D:
+            @Html.TextBox("A4", "", new { style="width:350px"})
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="row">
+        <div class=col-md-3></div>
+        <div class=col-md-6>
+            Doğru cevabı seçiniz:
+            @Html.DropDownList(
+            "Answer1",
+            new SelectList(
+            new List<SelectListItem>
+            {
+            new SelectListItem { Selected = true, Text = "A", Value = "1"},
+            new SelectListItem { Selected = false, Text = "B", Value = "2"},
+            new SelectListItem { Selected = false, Text = "C", Value = "3"},
+            new SelectListItem { Selected = false, Text = "D", Value = "4"}},
+            "Value" , "Text", 1),
+            new { style="width: 250px"})
+        </div>
+    </div>
+
+    <br />
+    <hr />
+    <br />
+
+    <div class="row">
+        Soru 2:
+        @Html.TextBox("Q2")
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class=col-md-6>
+            Cevap A:
+            @Html.TextBox("A5", "", new { style="width:350px"})
+        </div>
+        <div class=col-md-6>
+            Cevap B:
+            @Html.TextBox("A6", "", new { style="width:350px"})
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class=col-md-6>
+            Cevap C:
+            @Html.TextBox("A7", "", new { style="width:350px"})
+        </div>
+        <div class=col-md-6>
+            Cevap D:
+            @Html.TextBox("A8", "", new { style="width:350px"})
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="row">
+        <div class=col-md-3></div>
+        <div class=col-md-6>
+            Doğru cevabı seçiniz:
+            @Html.DropDownList(
+            "Answer2",
+            new SelectList(
+            new List<SelectListItem>
+            {
+            new SelectListItem { Selected = true, Text = "A", Value = "1"},
+            new SelectListItem { Selected = false, Text = "B", Value = "2"},
+            new SelectListItem { Selected = false, Text = "C", Value = "3"},
+            new SelectListItem { Selected = false, Text = "D", Value = "4"}},
+            "Value" , "Text", 1),
+            new { style="width: 250px"})
+        </div>
+    </div>
+
+    <br />
+    <hr />
+    <br />
+
+    <div class="row">
+        Soru 3:
+        @Html.TextBox("Q3")
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class=col-md-6>
+            Cevap A:
+            @Html.TextBox("A9", "", new { style="width:350px"})
+        </div>
+        <div class=col-md-6>
+            Cevap B:
+            @Html.TextBox("A10", "", new { style="width:350px"})
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class=col-md-6>
+            Cevap C:
+            @Html.TextBox("A11", "", new { style="width:350px"})
+        </div>
+        <div class=col-md-6>
+            Cevap D:
+            @Html.TextBox("A12", "", new { style="width:350px"})
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="row">
+        <div class=col-md-3></div>
+        <div class=col-md-6>
+            Doğru cevabı seçiniz:
+            @Html.DropDownList(
+            "Answer3",
+            new SelectList(
+            new List<SelectListItem>
+            {
+            new SelectListItem { Selected = true, Text = "A", Value = "1"},
+            new SelectListItem { Selected = false, Text = "B", Value = "2"},
+            new SelectListItem { Selected = false, Text = "C", Value = "3"},
+            new SelectListItem { Selected = false, Text = "D", Value = "4"}},
+            "Value" , "Text", 1),
+            new { style="width: 250px"})
+        </div>
+    </div>
+
+    <br />
+    <hr />
+    <br />
+
+    <div class="row">
+        Soru 4:
+        @Html.TextBox("Q4")
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class=col-md-6>
+            Cevap A:
+            @Html.TextBox("A13", "", new { style="width:350px"})
+        </div>
+        <div class=col-md-6>
+            Cevap B:
+            @Html.TextBox("A14", "", new { style="width:350px"})
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class=col-md-6>
+            Cevap C:
+            @Html.TextBox("A15", "", new { style="width:350px"})
+        </div>
+        <div class=col-md-6>
+            Cevap D:
+            @Html.TextBox("A16", "", new { style="width:350px"})
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="row">
+        <div class=col-md-3></div>
+        <div class=col-md-6>
+            Doğru cevabı seçiniz:
+            @Html.DropDownList(
+            "Answer4",
+            new SelectList(
+            new List<SelectListItem>
+            {
+            new SelectListItem { Selected = true, Text = "A", Value = "1"},
+            new SelectListItem { Selected = false, Text = "B", Value = "2"},
+            new SelectListItem { Selected = false, Text = "C", Value = "3"},
+            new SelectListItem { Selected = false, Text = "D", Value = "4"}},
+            "Value" , "Text", 1),
+            new { style="width: 250px"})
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row" style="position: relative; height:150px">
+        <input type="submit" value="Kaydet" class="btn btn-success" style="width:400px; height:80px; margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);" />
+    </div>
+
+
+</form>
