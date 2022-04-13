@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -5,6 +6,7 @@ using WebApp_Exam.Models;
 
 namespace WebApp_Exam.Pages
 {
+    [AllowAnonymous]
     public class RegisterModel : PageModel
     {
         private readonly ExamDbContext _examDbContext = new ExamDbContext();
@@ -13,8 +15,13 @@ namespace WebApp_Exam.Pages
         public InputModel Input { get; set; }
 
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToPage("Home");
+
+            else
+                return Page();
         }
 
         public class InputModel

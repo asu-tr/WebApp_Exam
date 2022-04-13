@@ -1,0 +1,25 @@
+﻿<ul class="navbar-nav">
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class="nav-item">
+            Merhaba @User.Identity.Name!
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="" asp-page="/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                <button type="submit" class="nav-link btn btn-link text-dark">Çıkış</button>
+            </form>
+        </li>
+    }
+
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Register">Kayıt Ol</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Login">Oturum Aç</a>
+        </li>
+    }
+
+</ul>
