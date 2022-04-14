@@ -8,52 +8,32 @@
 <div class="container">
 
     <div class="row">
-            <h2 class="text-danger">Mevcut Sınavlar</h2>
+        <h2 class="text-danger">Mevcut Sınavlar</h2>
     </div>
 
-    <div class="row table-bordered">
-        <div class="col-md-1">
-            ID
-        </div>
-        <div class="col-md-3">
-            Başlık
-        </div>
-        <div class="col-md-2">
-            Tarih
-        </div>
-        <div class="col-md-2">
-            Kullanıcı
-        </div>
-        <div class="col-md-1">
-            İşlem
-        </div>
-    </div>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>ID</th>
+            <th>Başlık</th>
+            <th>Tarih</th>
+            <th>Kullanıcı</th>
+            <th>İşlem</th>
+        </tr>
 
-    @if (Model.Exams != null)
-    {
-        @foreach (Exam e in Model.Exams)
+        @if (Model.Exams != null)
         {
-            <div class="row table-bordered">
-
-                <div class="col-md-1">
-                    @e.Id
-                </div>
-                <div class="col-md-3">
-                    @e.WiredText.Title
-                </div>
-                <div class="col-md-2">
-                    @e.CreatedAt
-                </div>
-                <div class="col-md-2">
-                    @e.Creator.Username
-                </div>
-                <div class="col-md-1">
-                    @*edit this*@
-                    @*@Html.ActionLink("Sil", "Delete", "Person", new { personId = p.Id }, new { @class = "btn btn-danger btn-sm" })*@
-                </div>
-
-            </div>
+            @foreach (Exam e in Model.Exams)
+            {
+                <tr>
+                    <td>@e.Id</td>
+                    <td>@e.WiredText.Title</td>
+                    <td>@e.CreatedAt</td>
+                    <td>@e.Creator.Username</td>
+                    <td><a asp-page="DeleteExam" asp-route-examId="@e.Id">Sil</a></td>
+                </tr>
+            }
         }
-    }
+
+    </table>
 
 </div>

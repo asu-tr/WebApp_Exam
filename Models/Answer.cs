@@ -12,6 +12,7 @@ namespace WebApp_Exam.Models
         [Required]
         public bool IsRightAnswer { get; set; }
 
+        public int QuestionId { get; set; }
         public virtual Question Question { get; set; }
     }
 }

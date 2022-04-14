@@ -1,7 +1,9 @@
 using HtmlAgilityPack;
 using HtmlAgilityPack.CssSelectors.NetCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 using WebApp_Exam.Models;
 
 namespace WebApp_Exam.Pages
@@ -10,9 +12,90 @@ namespace WebApp_Exam.Pages
     public class CreateExamModel : PageModel
     {
         private readonly string url = "https://www.wired.com/";
-        public List<WiredText> WiredTexts { get; set; } = new List<WiredText>();
-        public Exam NewExam { get; set; }
+        private readonly ExamDbContext _examDbContext = new ExamDbContext();
 
+        public List<WiredText> WiredTexts { get; set; } = new List<WiredText>();
+
+        [BindProperty]
+        public InputModel Input { get; set; }
+
+        public class InputModel
+        {
+            [Required]
+            public string WiredTextTitle { get; set; }
+
+            [Required]
+            public string Q1 { get; set; }
+
+            [Required]
+            public string A1 { get; set; }
+
+            [Required]
+            public string A2 { get; set; }
+
+            [Required]
+            public string A3 { get; set; }
+
+            [Required]
+            public string A4 { get; set; }
+
+            [Required]
+            public int Answer1 { get; set; }
+
+            [Required]
+            public string Q2 { get; set; }
+
+            [Required]
+            public string A5 { get; set; }
+
+            [Required]
+            public string A6 { get; set; }
+
+            [Required]
+            public string A7 { get; set; }
+
+            [Required]
+            public string A8 { get; set; }
+
+            [Required]
+            public int Answer2 { get; set; }
+
+            [Required]
+            public string Q3 { get; set; }
+
+            [Required]
+            public string A9 { get; set; }
+
+            [Required]
+            public string A10 { get; set; }
+
+            [Required]
+            public string A11 { get; set; }
+
+            [Required]
+            public string A12 { get; set; }
+
+            [Required]
+            public int Answer3 { get; set; }
+
+            [Required]
+            public string Q4 { get; set; }
+
+            [Required]
+            public string A13 { get; set; }
+
+            [Required]
+            public string A14 { get; set; }
+
+            [Required]
+            public string A15 { get; set; }
+
+            [Required]
+            public string A16 { get; set; }
+
+            [Required]
+            public int Answer4 { get; set; }
+        }
 
         public void OnGet()
         {
@@ -57,5 +140,145 @@ namespace WebApp_Exam.Pages
 
             return tempList;
         } 
+
+        public IActionResult OnPost()
+        {
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+
+            if (ModelState.IsValid)
+            {
+                // create a new exam
+                Exam newExam = new Exam()
+                {
+                    Creator = _examDbContext.Users.Where(x => x.Username == User.Identity.Name).FirstOrDefault(),
+                    WiredText = GetAllTextInfo().Where(x => x.Text == Input.WiredTextTitle).FirstOrDefault(),
+                    Questions = new List<Question>()
+                    {
+                        new Question()
+                        {
+                            Text = Input.Q1,
+                            Answers = new List<Answer>()
+                            {
+                                new Answer()
+                                {
+                                    Text = Input.A1,
+                                    IsRightAnswer = false
+                                },
+                                new Answer()
+                                {
+                                    Text = Input.A2,
+                                    IsRightAnswer = false
+                                },
+                                new Answer()
+                                {
+                                    Text = Input.A3,
+                                    IsRightAnswer = false
+                                },
+                                new Answer()
+                                {
+                                    Text = Input.A4,
+                                    IsRightAnswer = false
+                                }
+                            },
+                        },
+                        new Question()
+                        {
+                            Text = Input.Q2,
+                            Answers = new List<Answer>()
+                            {
+                                new Answer()
+                                {
+                                    Text = Input.A5,
+                                    IsRightAnswer = false
+                                },
+                                new Answer()
+                                {
+                                    Text = Input.A6,
+                                    IsRightAnswer = false
+                                },
+                                new Answer()
+                                {
+                                    Text = Input.A7,
+                                    IsRightAnswer = false
+                                },
+                                new Answer()
+                                {
+                                    Text = Input.A8,
+                                    IsRightAnswer = false
+                                }
+                            }
+                        },
+                        new Question()
+                        {
+                            Text = Input.Q3,
+                            Answers = new List<Answer>()
+                            {
+                                new Answer()
+                                {
+                                    Text = Input.A9,
+                                    IsRightAnswer = false
+                                },
+                                new Answer()
+                                {
+                                    Text = Input.A10,
+                                    IsRightAnswer = false
+                                },
+                                new Answer()
+                                {
+                                    Text = Input.A11,
+                                    IsRightAnswer = false
+                                },
+                                new Answer()
+                                {
+                                    Text = Input.A12,
+                                    IsRightAnswer = false
+                                }
+                            }
+                        },
+                        new Question()
+                        {
+                            Text = Input.Q4,
+                            Answers = new List<Answer>()
+                            {
+                                new Answer()
+                                {
+                                    Text = Input.A13,
+                                    IsRightAnswer = false
+                                },
+                                new Answer()
+                                {
+                                    Text = Input.A14,
+                                    IsRightAnswer = false
+                                },
+                                new Answer()
+                                {
+                                    Text = Input.A15,
+                                    IsRightAnswer = false
+                                },
+                                new Answer()
+                                {
+                                    Text = Input.A16,
+                                    IsRightAnswer = false
+                                }
+                            }
+                        }
+                    }
+                };
+
+                // add right answers
+                int[] rightAnswers = { Input.Answer1, Input.Answer2, Input.Answer3, Input.Answer4 };
+                for (int i = 0; i < 4; i++)
+                {
+                    newExam.Questions[i].Answers[rightAnswers[i] - 1].IsRightAnswer = true;
+                }
+
+                _examDbContext.Exams.Add(newExam);
+                _examDbContext.SaveChanges();
+
+                return RedirectToPage("Home");
+            }
+
+            return Page();
+        }
     }
 }

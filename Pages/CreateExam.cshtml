@@ -6,72 +6,77 @@
 
 <form method="post">
 
-    <div class="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-floating">
         Yazı seçiniz:
-        <select id="drpTitles" class="form-control" asp-for="NewExam.WiredText.Title" asp-items="@(new SelectList(Model.WiredTexts, "Title", "Title"))">
+        <select id="drpTitles" class="form-control" asp-for="Input.WiredTextTitle" asp-items="@(new SelectList(Model.WiredTexts, "Text", "Title"))">
             <option value="">--Seçiniz--</option>
         </select>
-        <input type="hidden" asp-for="NewExam.WiredText.Title" />
+        <input type="hidden" asp-for="Input.WiredTextTitle" />
     </div>
 
     <br />
 
     <div class="row">
-        @Html.TextArea("text", new { @class = "form-control", @readonly = "readonly", style = "height:250px;" })
+        <p id="titleText"></p>
     </div>
 
     <hr />
     <br />
 
-    <div class="row">
-        Soru 1:
-        @Html.TextBox("Q1")
-    </div>
+    <div class="row" id="q1">
 
-    <br />
-
-    <div class="row">
-        <div class=col-md-6>
-            Cevap A:
-            @Html.TextBox("A1", "", new { style="width:350px"})
+        <div class="row">
+            Soru 1:
+            <input type="text" asp-for="Input.Q1" />
         </div>
-        <div class=col-md-6>
-            Cevap B:
-            @Html.TextBox("A2", "", new { style="width:350px"})
+
+        <br />
+
+        <div class="row">
+            <div class=col-md-6>
+                Cevap A:
+                <input type="text" asp-for="Input.A1" style="width:350px" />
+            </div>
+            <div class=col-md-6>
+                Cevap B:
+                <input type="text" asp-for="Input.A2" style="width:350px" />
+            </div>
         </div>
-    </div>
 
-    <br />
+        <br />
 
-    <div class="row">
-        <div class=col-md-6>
-            Cevap C:
-            @Html.TextBox("A3", "", new { style="width:350px"})
+        <div class="row">
+            <div class=col-md-6>
+                Cevap C:
+                <input type="text" asp-for="Input.A3" style="width:350px" />
+            </div>
+            <div class=col-md-6>
+                Cevap D:
+                <input type="text" asp-for="Input.A4" style="width:350px" />
+            </div>
         </div>
-        <div class=col-md-6>
-            Cevap D:
-            @Html.TextBox("A4", "", new { style="width:350px"})
-        </div>
-    </div>
 
-    <br />
-    <br />
+        <br />
+        <br />
 
-    <div class="row">
-        <div class=col-md-3></div>
-        <div class=col-md-6>
-            Doğru cevabı seçiniz:
-            @Html.DropDownList(
-            "Answer1",
-            new SelectList(
-            new List<SelectListItem>
-            {
-            new SelectListItem { Selected = true, Text = "A", Value = "1"},
-            new SelectListItem { Selected = false, Text = "B", Value = "2"},
-            new SelectListItem { Selected = false, Text = "C", Value = "3"},
-            new SelectListItem { Selected = false, Text = "D", Value = "4"}},
-            "Value" , "Text", 1),
-            new { style="width: 250px"})
+        <div class="row">
+            <div class=col-md-3></div>
+            <div class=col-md-6>
+                Doğru cevabı seçiniz:
+                @Html.DropDownListFor(
+                Model => Model.Input.Answer1,
+                new SelectList(
+                new List<SelectListItem>
+                {
+                new SelectListItem { Selected = true, Text = "A", Value = "1"},
+                new SelectListItem { Selected = false, Text = "B", Value = "2"},
+                new SelectListItem { Selected = false, Text = "C", Value = "3"},
+                new SelectListItem { Selected = false, Text = "D", Value = "4"}},
+                "Value" , "Text", 1),
+                new { style="width: 250px"})
+            </div>
         </div>
     </div>
 
@@ -81,7 +86,7 @@
 
     <div class="row">
         Soru 2:
-        @Html.TextBox("Q2")
+        <input type="text" asp-for="Input.Q2" />
     </div>
 
     <br />
@@ -89,11 +94,11 @@
     <div class="row">
         <div class=col-md-6>
             Cevap A:
-            @Html.TextBox("A5", "", new { style="width:350px"})
+            <input type="text" asp-for="Input.A5" style="width:350px" />
         </div>
         <div class=col-md-6>
             Cevap B:
-            @Html.TextBox("A6", "", new { style="width:350px"})
+            <input type="text" asp-for="Input.A6" style="width:350px" />
         </div>
     </div>
 
@@ -102,11 +107,11 @@
     <div class="row">
         <div class=col-md-6>
             Cevap C:
-            @Html.TextBox("A7", "", new { style="width:350px"})
+            <input type="text" asp-for="Input.A7" style="width:350px" />
         </div>
         <div class=col-md-6>
             Cevap D:
-            @Html.TextBox("A8", "", new { style="width:350px"})
+            <input type="text" asp-for="Input.A8" style="width:350px" />
         </div>
     </div>
 
@@ -117,8 +122,8 @@
         <div class=col-md-3></div>
         <div class=col-md-6>
             Doğru cevabı seçiniz:
-            @Html.DropDownList(
-            "Answer2",
+            @Html.DropDownListFor(
+            Model => Model.Input.Answer2,
             new SelectList(
             new List<SelectListItem>
             {
@@ -137,7 +142,7 @@
 
     <div class="row">
         Soru 3:
-        @Html.TextBox("Q3")
+        <input type="text" asp-for="Input.Q3" />
     </div>
 
     <br />
@@ -145,11 +150,11 @@
     <div class="row">
         <div class=col-md-6>
             Cevap A:
-            @Html.TextBox("A9", "", new { style="width:350px"})
+            <input type="text" asp-for="Input.A9" style="width:350px" />
         </div>
         <div class=col-md-6>
             Cevap B:
-            @Html.TextBox("A10", "", new { style="width:350px"})
+            <input type="text" asp-for="Input.A10" style="width:350px" />
         </div>
     </div>
 
@@ -158,11 +163,11 @@
     <div class="row">
         <div class=col-md-6>
             Cevap C:
-            @Html.TextBox("A11", "", new { style="width:350px"})
+            <input type="text" asp-for="Input.A11" style="width:350px" />
         </div>
         <div class=col-md-6>
             Cevap D:
-            @Html.TextBox("A12", "", new { style="width:350px"})
+            <input type="text" asp-for="Input.A12" style="width:350px" />
         </div>
     </div>
 
@@ -173,8 +178,8 @@
         <div class=col-md-3></div>
         <div class=col-md-6>
             Doğru cevabı seçiniz:
-            @Html.DropDownList(
-            "Answer3",
+            @Html.DropDownListFor(
+            Model => Model.Input.Answer3,
             new SelectList(
             new List<SelectListItem>
             {
@@ -193,7 +198,7 @@
 
     <div class="row">
         Soru 4:
-        @Html.TextBox("Q4")
+        <input type="text" asp-for="Input.Q4" />
     </div>
 
     <br />
@@ -201,11 +206,11 @@
     <div class="row">
         <div class=col-md-6>
             Cevap A:
-            @Html.TextBox("A13", "", new { style="width:350px"})
+            <input type="text" asp-for="Input.A13" style="width:350px" />
         </div>
         <div class=col-md-6>
             Cevap B:
-            @Html.TextBox("A14", "", new { style="width:350px"})
+            <input type="text" asp-for="Input.A14" style="width:350px" />
         </div>
     </div>
 
@@ -214,11 +219,11 @@
     <div class="row">
         <div class=col-md-6>
             Cevap C:
-            @Html.TextBox("A15", "", new { style="width:350px"})
+            <input type="text" asp-for="Input.A15" style="width:350px" />
         </div>
         <div class=col-md-6>
             Cevap D:
-            @Html.TextBox("A16", "", new { style="width:350px"})
+            <input type="text" asp-for="Input.A16" style="width:350px" />
         </div>
     </div>
 
@@ -229,8 +234,8 @@
         <div class=col-md-3></div>
         <div class=col-md-6>
             Doğru cevabı seçiniz:
-            @Html.DropDownList(
-            "Answer4",
+            @Html.DropDownListFor(
+            Model => Model.Input.Answer4,
             new SelectList(
             new List<SelectListItem>
             {
@@ -249,5 +254,17 @@
         <input type="submit" value="Kaydet" class="btn btn-success" style="width:400px; height:80px; margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);" />
     </div>
 
-
 </form>
+
+<script>
+
+    $(document).ready(
+        function() {
+            $("#drpTitles").change(
+                function(){
+                    var wText = $("#drpTitles").find(":selected").val();
+                    $("#titleText").html(wText);
+                });
+        });
+
+</script>
