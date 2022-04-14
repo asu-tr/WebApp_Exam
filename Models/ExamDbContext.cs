@@ -9,6 +9,7 @@ namespace WebApp_Exam.Models
         public DbSet<Question> Questions { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<WiredText> WiredTexts { get; set; }
+        public DbSet<Answer> Answers { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
