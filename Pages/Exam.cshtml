@@ -1,0 +1,124 @@
+﻿@page
+@model WebApp_Exam.Pages.ExamModel
+@using WebApp_Exam.Models
+@{
+    ViewData["Title"] = "Sınav " + @Model.currentExam.Id.ToString();
+}
+
+
+<div class="form-floating">
+    <h2>@Model.currentExam.WiredText.Title</h2>
+</div>
+
+<br />
+
+<div class="row">
+    <p id="txtHidden" hidden>@Model.currentExam.WiredText.Text</p>
+    <p id="wiredText"></p>
+</div>
+
+<hr />
+<br />
+
+@{
+    int i = 1;
+}
+@foreach (Question q in Model.currentExam.Questions)
+{
+    <div class="row">
+
+        <div class="row">
+            Soru @i:
+            <p>@q.Text</p>
+        </div>
+
+        <br />
+
+        @{
+            int j = 0;
+        }
+        @foreach (Answer a in q.Answers)
+        {
+            <div class=col-md-6>
+
+                @{
+                    string Id = "question" + i.ToString() + j.ToString();
+                    string groupId = "question" + i.ToString();
+                }
+
+                <label id="@Id">
+
+                    <input type="radio" id="question@{i.ToString();}" value="@a.IsRightAnswer.ToString()" name="@groupId">
+                    @a.Text
+
+                </label>
+
+            </div>
+            { j++; }
+        }
+
+    </div>
+
+    <br />
+    <hr />
+    <br />
+
+    { i++; }
+}
+
+<br />
+
+<div class="row" style="position: relative; height:150px">
+    <button type="button" id="btn" class="btn btn-success" style="width:400px; height:80px; margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
+        Sınavı Bitir
+    </button>
+</div>
+
+
+<script>
+
+    $(function(){
+
+        var txt = $("#txtHidden").text();
+        $("#wiredText").html(txt);
+
+        $("#btn").click(
+            function(){
+
+                const answers = [];
+                answers[0] = $("input[name=question1]:checked").val();
+                answers[1] = $("input[name=question2]:checked").val();
+                answers[2] = $("input[name=question3]:checked").val();
+                answers[3] = $("input[name=question4]:checked").val();
+
+                if (answers[0] == "True"){
+                    $("input[name=question1]:checked").parent().css("background-color", "green");
+                } else{
+                    $("input[name=question1]:checked").parent().css("background-color", "red");
+                }
+
+                if (answers[1] == "True"){
+                    $("input[name=question2]:checked").parent().css("background-color", "green");
+                } else{
+                    $("input[name=question2]:checked").parent().css("background-color", "red");
+                }
+
+                if (answers[2] == "True"){
+                    $("input[name=question3]:checked").parent().css("background-color", "green");
+                } else{
+                    $("input[name=question3]:checked").parent().css("background-color", "red");
+                }
+
+                if (answers[3] == "True"){
+                    $("input[name=question4]:checked").parent().css("background-color", "green");
+                } else{
+                    $("input[name=question4]:checked").parent().css("background-color", "red");
+                }
+
+            });
+
+
+
+    });
+
+</script>
