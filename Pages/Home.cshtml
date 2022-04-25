@@ -16,7 +16,7 @@
             <th>ID</th>
             <th>Başlık</th>
             <th>Tarih</th>
-            <th>Kullanıcı</th>
+            <th>Oluşturan Kullanıcı</th>
             <th>İşlem</th>
         </tr>
 
@@ -29,6 +29,7 @@
                     <td>@e.WiredText.Title</td>
                     <td>@e.CreatedAt</td>
                     <td>@e.Creator.Username</td>
+                    <td><a asp-page="Exam" asp-route-examId="@e.Id">Gir</a></td>
                     <td><a asp-page="DeleteExam" asp-route-examId="@e.Id">Sil</a></td>
                 </tr>
             }
